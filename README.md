@@ -1,5 +1,5 @@
-# BuildRESTfulAPIsUsingAspNetCoreAndEntityFrameworkCore
+# Build RESTful APIs using Asp.Net Core And Entity Framework Core
 
-This is the code source for the tutorial 
+This is the code source for the tutorial:
 
-http://codingsonata.com/secure-asp-net-core-web-api-using-jwt-authentication/
+http://codingsonata.com/build-restful-apis-using-asp-net-core-and-entity-framework-core/
