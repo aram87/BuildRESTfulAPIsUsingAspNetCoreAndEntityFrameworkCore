@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "MyDictionaryApp",
+  "display": "standalone",
+  "name": "MyDictionaryApp",
+  "short_name": "MyDictionaryApp",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}

@@ -1,0 +1,77 @@
+﻿<Page x:Class="MyDictionaryApp.Presentation.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:MyDictionaryApp.Presentation"
+      xmlns:uen="using:Uno.Extensions.Navigation.UI"
+      xmlns:utu="using:Uno.Toolkit.UI"
+      xmlns:um="using:Uno.Material"
+      xmlns:mvux="using:Uno.Extensions.Reactive.UI"
+      NavigationCacheMode="Required"
+      Background="{ThemeResource BackgroundBrush}">
+  <ScrollViewer>
+    <Grid utu:SafeArea.Insets="VisibleBounds" HorizontalAlignment="Stretch">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="auto"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto"  />
+        <RowDefinition Height="auto" />
+      </Grid.RowDefinitions>
+      <utu:NavigationBar Grid.Row="0"  Grid.Column="0" HorizontalAlignment="Center" Content="{Binding Title}" />
+      <StackPanel Padding="5" Margin="5" Grid.Column="0" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Stretch">
+        <TextBox HorizontalAlignment="Stretch" Text="{Binding SearchTerm, Mode=TwoWay}"
+            PlaceholderText="Enter the word to search for" />
+        <Button HorizontalAlignment="Stretch" Content="Search" Margin="0 10 0 0"
+          Command="{Binding SearchDefinitions}"/>
+      </StackPanel>
+
+      <mvux:FeedView Grid.Column="0" Grid.Row="2" Source="{Binding SearchDefinitions}" x:Name="DefinitionsFeedView" Padding="3">
+        <mvux:FeedView.ValueTemplate>
+          <DataTemplate>
+            <ListView ItemsSource="{Binding Data}">
+              <ListView.ItemTemplate>
+                <DataTemplate>
+
+                  <StackPanel Orientation="Vertical" Margin="5">
+                    <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding Word}"/>
+                    <TextBlock FontStyle="Italic"  Text="{Binding Category}"/>
+                    <TextBlock Text="{Binding Definitions}" HorizontalAlignment="Stretch" />
+                    <TextBlock><LineBreak/></TextBlock>
+                    <TextBlock FontSize="18" Text="Synonyms:"></TextBlock>
+                    <TextBlock Text="{Binding Synonyms}" HorizontalAlignment="Stretch" />
+                    <TextBlock><LineBreak/></TextBlock>
+                    <TextBlock FontWeight="Bold" Text="Examples:"/>
+                    <StackPanel Orientation="Vertical">
+                      <ItemsView ItemsSource="{Binding Examples}" >
+                        <ItemsView.Layout>
+                          <StackLayout></StackLayout>
+                        </ItemsView.Layout>
+                      </ItemsView>
+                    </StackPanel>
+                  </StackPanel>
+                </DataTemplate>
+              </ListView.ItemTemplate>
+            </ListView>
+          </DataTemplate>
+        </mvux:FeedView.ValueTemplate>
+        <mvux:FeedView.ProgressTemplate>
+          <DataTemplate>
+            <ProgressRing />
+          </DataTemplate>
+        </mvux:FeedView.ProgressTemplate>
+        <mvux:FeedView.ErrorTemplate>
+          <DataTemplate>
+            <TextBlock HorizontalAlignment="Center" FontSize="18" Text="Unable to lookup in the dictionary" />
+          </DataTemplate>
+        </mvux:FeedView.ErrorTemplate>
+        <mvux:FeedView.NoneTemplate>
+          <DataTemplate>
+            <TextBlock HorizontalAlignment="Center" FontSize="18"  Text="No Results Found " />
+          </DataTemplate>
+        </mvux:FeedView.NoneTemplate>
+      </mvux:FeedView>
+    </Grid>
+  </ScrollViewer>
+</Page>
